@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body} from '@nestjs/common';
+import {Controller, Get, Post, Body, Request} from '@nestjs/common';
 import {AlarmsService} from '../../application/alarms.service';
 import {CreateAlarmDto} from './dto/create-alarm.dto';
 import {CreateAlarmCommand} from "../../application/commands/create-alarm.command";
@@ -9,7 +9,7 @@ export class AlarmsController {
     }
 
     @Post()
-    create(@Body() createAlarmDto: CreateAlarmDto) {
+    public async create(@Body() createAlarmDto: CreateAlarmDto) {
         return this.alarmsService.create(
             new CreateAlarmCommand(createAlarmDto.name, createAlarmDto.severity)
         );
